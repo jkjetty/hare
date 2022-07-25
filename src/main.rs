@@ -43,6 +43,8 @@ fn search(cmd: String) -> Redirect {
         "photo" | "photos" => String::from("https://photos.google.com/"),
         "rc" => String::from("https://app.re-collect.ai/"),
         "tw" => utils::twitter::construct_twitter_url(&cmd),
+        "wp" => String::from("https://jettylabs.workplace.com/"),
+        "wpp" => String::from("https://jettylabs.workplace.com/profile.php"),
         // Default to google search.
         _ => utils::google::construct_google_search_url(&cmd),
     };
