@@ -1,4 +1,4 @@
-# Rusty Bunny
+# Hare
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -18,7 +18,7 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-- [Rusty Bunny](#rusty-bunny)
+- [Hare](#hare)
   - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
