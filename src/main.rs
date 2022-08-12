@@ -38,6 +38,7 @@ fn search(cmd: String) -> Redirect {
         "l3" => String::from("http://localhost:3000/"),
         "l8" => String::from("http://localhost:8000/"),
         "lh" => utils::localhost::construct_localhost_url(&cmd),
+        "lyrics" => utils::lyrics::construct_lyrics_url(&cmd),
         "mail" => String::from("https://mail.google.com/"),
         "map" | "maps" => String::from("https://maps.google.com/"),
         "photo" | "photos" => String::from("https://photos.google.com/"),
