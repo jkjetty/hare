@@ -28,6 +28,7 @@ fn search(cmd: String) -> Redirect {
     let redirect_url = match command {
         "cal" => String::from("https://calendar.google.com/"),
         "ck" => String::from("https://app.convertkit.com/"),
+        "crates" => utils::crates::construct_crates_search_url(&cmd),
         "drive" => String::from("https://drive.google.com/"),
         "dp" | "disney" | "disneyplus" => String::from("https://disneyplus.com"),
         "figma" => String::from("https://figma.com"),

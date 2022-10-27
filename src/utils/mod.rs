@@ -1,3 +1,4 @@
+pub mod crates;
 pub mod github;
 pub mod google;
 pub mod localhost;
