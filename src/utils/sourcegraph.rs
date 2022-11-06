@@ -4,6 +4,9 @@ use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
 // Used as part of the percent_encoding library
 const FRAGMENT: &AsciiSet = &CONTROLS
+    .add(b'|')
+    .add(b'?')
+    .add(b'*')
     .add(b' ')
     .add(b'"')
     .add(b'<')
