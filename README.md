@@ -74,7 +74,22 @@ To test out a command, type in http://localhost:8000/search?cmd= followed by you
 
 See supported commands in the [`redirect_url` list](https://github.com/jkjetty/hare/blob/master/src/main.rs).
 
-Everything else redirects to a google search with your query.
+Everything else redirects to a google search with your query. 
+
+<!-- Default search -->
+## Setting Hare as your default search engine
+
+Chrome instructions:
+- Go to `chrome://settings`
+- Click the "Search engine" tab on the right
+- Click "manage search engines"
+- Under "Site search" click the "Add" button
+- Enter "hare" for the search engine and shortcut
+- Enter `localhost:8000/search?cmd=%s` as the URL 
+- Click "Add" to save the search engine
+- Click the menu (three dots) next to your new entry
+- Click "Make default" 
+- Open a new tab and try it out! Enter "g robot vacuums" and make sure google search comes up
 
 <!-- LICENSE -->
 ## License
