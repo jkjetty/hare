@@ -46,8 +46,6 @@ fn search(cmd: String) -> Redirect {
         "rc" => String::from("https://app.re-collect.ai/"),
         "sg" => utils::sourcegraph::construct_sourcegraph_search_url(&cmd),
         "tw" => utils::twitter::construct_twitter_url(&cmd),
-        "wp" => String::from("https://jettylabs.workplace.com/"),
-        "wpp" => String::from("https://jettylabs.workplace.com/profile.php"),
         // Default to google search.
         _ => utils::google::construct_google_search_url(&cmd),
     };
