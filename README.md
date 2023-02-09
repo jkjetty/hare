@@ -98,14 +98,14 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/jkjetty/hare.svg?style=flat-square
-[contributors-url]: https://github.com/jkjetty/hare/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jkjetty/hare.svg?style=flat-square
-[forks-url]: https://github.com/jkjetty/hare/network/members
-[stars-shield]: https://img.shields.io/github/stars/jkjetty/hare.svg?style=flat-square
-[stars-url]: https://github.com/jkjetty/hare/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jkjetty/hare.svg?style=flat-square
-[issues-url]: https://github.com/jkjetty/hare/issues
-[license-shield]: https://img.shields.io/github/license/jkjetty/hare?style=flat-square
-[license-url]: https://github.com/jkjetty/hare/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/after-ephemera/hare.svg?style=flat-square
+[contributors-url]: https://github.com/after-ephemera/hare/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/after-ephemera/hare.svg?style=flat-square
+[forks-url]: https://github.com/after-ephemera/hare/network/members
+[stars-shield]: https://img.shields.io/github/stars/after-ephemera/hare.svg?style=flat-square
+[stars-url]: https://github.com/after-ephemera/hare/stargazers
+[issues-shield]: https://img.shields.io/github/issues/after-ephemera/hare.svg?style=flat-square
+[issues-url]: https://github.com/after-ephemera/hare/issues
+[license-shield]: https://img.shields.io/github/license/after-ephemera/hare?style=flat-square
+[license-url]: https://github.com/after-ephemera/hare/blob/master/LICENSE
 [product-screenshot]: demo.gif
