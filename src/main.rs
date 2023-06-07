@@ -1,20 +1,19 @@
-#![feature(proc_macro_hygiene, decl_macro)]
-
+use std::collections::HashMap;
 use std::convert::From;
 use std::fmt::Write;
-use std::collections::HashMap;
 
 use lazy_static::lazy_static;
 use maplit::hashmap;
 use rocket::{
+    fs::NamedFile,
+    get, launch,
+    response::{content::RawHtml, Redirect},
     routes,
-    get,
-    response::{NamedFile, Redirect, content::Html}
 };
 
 mod utils;
 
-lazy_static!{
+lazy_static! {
     static ref PATH_MAP:HashMap<Vec<String>, HareOption> = hashmap!{
         // Keep in alphabetic order
         vec!["cal".to_owned()] => HareOption::GCal,
@@ -40,19 +39,19 @@ lazy_static!{
 }
 
 #[derive(Debug, Clone)]
-enum HareOption{
-    GCal, // gcal
+enum HareOption {
+    GCal,     // gcal
     CratesIo, // crates.io
-    GDrive, // gdrive
+    GDrive,   // gdrive
     DisneyPlus,
-    Google, 
+    Google,
     Github,
     HackerNews,
     Instapaper,
     Localhost3000,
     Localhost8000,
     Localhost,
-    Ls, // List all Hare commands
+    Ls,     // List all Hare commands
     Lyrics, // Genius lyrics
     GMail,
     GMaps,
@@ -63,27 +62,30 @@ enum HareOption{
 }
 
 impl From<&str> for HareOption {
-    fn from(cmd: &str) -> Self{
-        PATH_MAP.get(&vec![cmd.to_owned()]).unwrap_or_else(|| {
-            // PATH_MAP.iter().map(|(cmds, option)|{
-            for (cmds, option) in PATH_MAP.iter(){
-                if cmds.contains(&cmd.to_owned()){
-                    return option
+    fn from(cmd: &str) -> Self {
+        PATH_MAP
+            .get(&vec![cmd.to_owned()])
+            .unwrap_or_else(|| {
+                // PATH_MAP.iter().map(|(cmds, option)|{
+                for (cmds, option) in PATH_MAP.iter() {
+                    if cmds.contains(&cmd.to_owned()) {
+                        return option;
+                    }
                 }
-            }
-            &HareOption::Google
-        }).clone()
+                &HareOption::Google
+            })
+            .clone()
     }
 }
 
 impl ToString for HareOption {
     fn to_string(&self) -> String {
-        match self{
-            Self::GCal => "Google Calendar".to_string(), 
+        match self {
+            Self::GCal => "Google Calendar".to_string(),
             Self::CratesIo => "crates.io".to_string(),
             Self::GDrive => "Google Drive".to_string(),
             Self::DisneyPlus => "Disney Plus".to_string(),
-            Self::Google => "Google search".to_string(), 
+            Self::Google => "Google search".to_string(),
             Self::Github => "Github".to_string(),
             Self::HackerNews => "Hacker News landing page".to_string(),
             Self::Instapaper => "Instapaper home".to_string(),
@@ -102,9 +104,9 @@ impl ToString for HareOption {
     }
 }
 
-impl HareOption{
-    fn url(self, cmd:&str) -> String{
-        match self{
+impl HareOption {
+    fn url(self, cmd: &str) -> String {
+        match self {
             Self::GCal => String::from("https://calendar.google.com/"),
             Self::CratesIo => utils::crates::construct_crates_search_url(&cmd),
             Self::GDrive => String::from("https://drive.google.com/"),
@@ -128,10 +130,9 @@ impl HareOption{
     }
 }
 
-
 #[get("/favicon.ico")]
-fn favicon() -> Option<NamedFile> {
-    NamedFile::open("./static/favicon.co").ok()
+async fn favicon() -> Option<NamedFile> {
+    NamedFile::open("./static/favicon.co").await.ok()
 }
 
 #[get("/")]
@@ -140,13 +141,13 @@ fn index() -> &'static str {
 }
 
 #[get("/ls")]
-// fn ls() -> Html<String> {
+// fn ls() -> RawHtml<String> {
 fn ls() -> String {
     let mut listing = String::new();
-    for (cmds, opt) in PATH_MAP.iter(){
+    for (cmds, opt) in PATH_MAP.iter() {
         write!(listing, "{}\n", cmds.join(" | "));
         write!(listing, "\t{}\n", &opt.to_string());
-   }
+    }
     // format!("{:#?}", PATH_MAP.iter().collect::<Vec<(&Vec<String>, &HareOption)>>())
     listing
 }
@@ -163,8 +164,7 @@ fn search(cmd: String) -> Redirect {
     Redirect::to(redirect_url)
 }
 
-fn main() {
-    rocket::ignite()
-        .mount("/", routes![index, search, favicon, ls])
-        .launch();
+#[launch]
+async fn rocket() -> _ {
+    rocket::build().mount("/", routes![index, search, favicon, ls])
 }
