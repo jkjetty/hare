@@ -4,12 +4,7 @@ use std::fmt::Write;
 
 use lazy_static::lazy_static;
 use maplit::hashmap;
-use rocket::{
-    fs::NamedFile,
-    get, launch,
-    response::{content::RawHtml, Redirect},
-    routes,
-};
+use rocket::{fs::NamedFile, get, launch, response::Redirect, routes};
 
 mod utils;
 
@@ -34,6 +29,7 @@ lazy_static! {
         vec!["photo".to_owned(), "photos".to_owned()] => HareOption::GPhotos,
         vec!["rc".to_owned()] => HareOption::Recollect,
         vec!["sg".to_owned()] => HareOption::SourceGraph,
+        vec!["sw".to_owned()] => HareOption::SongWhip,
         vec!["tw".to_owned()] => HareOption::Twitter,
     };
 }
@@ -58,6 +54,7 @@ enum HareOption {
     GPhotos,
     Recollect,
     SourceGraph,
+    SongWhip, // search song in songwhip
     Twitter,
 }
 
@@ -99,6 +96,7 @@ impl ToString for HareOption {
             Self::GPhotos => "Google Photos".to_string(),
             Self::Recollect => "Recollect home".to_string(),
             Self::SourceGraph => "Sourcegraph search".to_string(),
+            Self::SongWhip => "SongWhip".to_string(),
             Self::Twitter => "Twitter".to_string(),
         }
     }
@@ -125,6 +123,7 @@ impl HareOption {
             Self::GPhotos => String::from("https://photos.google.com/"),
             Self::Recollect => String::from("https://app.re-collect.ai/"),
             Self::SourceGraph => utils::sourcegraph::construct_sourcegraph_search_url(&cmd),
+            Self::SongWhip => utils::songwhip::construct_songwhip_search_url(&cmd),
             Self::Twitter => utils::twitter::construct_twitter_url(&cmd),
         }
     }
@@ -148,7 +147,6 @@ fn ls() -> String {
         write!(listing, "{}\n", cmds.join(" | "));
         write!(listing, "\t{}\n", &opt.to_string());
     }
-    // format!("{:#?}", PATH_MAP.iter().collect::<Vec<(&Vec<String>, &HareOption)>>())
     listing
 }
 

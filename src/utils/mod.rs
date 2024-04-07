@@ -3,6 +3,7 @@ pub mod github;
 pub mod google;
 pub mod localhost;
 pub mod lyrics;
+pub mod songwhip;
 pub mod sourcegraph;
 pub mod twitter;
 
